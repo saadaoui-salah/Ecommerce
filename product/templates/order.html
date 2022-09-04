@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+
+
+{% block 'content' %}
+<div class="flex" style="margin: 110px 20px 30px 25px ;">
+    <section class="shopping-card">
+        {% for order in orders %}
+        <div class="item-card flex">
+            <img class="p-image" src="{{ order.product.image.url }}" alt="">
+            <div>
+                <h4 class="p-name">{{ order.product.name }}</h5>
+                <input class="counter" type="number" name="count" value="{{ order.count }}" id="{{order.id}}">
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+    <section class="form">
+        <div>
+            <label for="name">Adress</label>
+            <input type="text" name="adress">
+        </div>
+        <div>
+            <label for="name">Phone Number</label>
+            <input type="tel" name="phoneNumber">
+        </div>
+        <button onclick="alert()" class="btn">Submit</button>
+    </section>
+</div>
+<style>
+
+.btn{
+    background-color: #22ff1b;
+    width: 90px;
+    height: 35px;
+    border: none;
+    cursor: pointer;
+}
+
+.flex{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.p-name {
+    margin-bottom: 5px;
+}
+.item-card{
+    border: #121212 solid 0.5px;
+    margin-bottom: 5px;
+    justify-content: start;
+}
+
+input{
+    font-size: 15px;
+}
+
+.counter{
+    width: 50px;
+    height: 30px;
+    padding: 3px;
+}
+
+.shopping-card{
+	width: 75vw;
+	border: #bdbdbd solid 1px;	
+}
+
+.p-image{
+	width: 100px;
+	height: 100px;
+}
+
+.form{
+	display: block;
+}
+</style>
+{% endblock %}
