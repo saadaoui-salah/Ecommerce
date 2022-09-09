@@ -119,6 +119,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = "/var/www/my-ecommerce12.herokuapp.com/static/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     '/var/www/static/',
