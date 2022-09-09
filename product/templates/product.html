@@ -9,15 +9,33 @@
             <h4>{{ product.name }}</h4>
             <h5>{{ product.price }}</h5>
             <div class="cart">
-                <a id="{{product.id}}"  href="#" onclick="addToOrder('{{product.id}}')" ><i class='bx bx-cart' ></i></a>
+                <button style="cursor: pointer;" onclick="addProduct('{{product.id}}')"  href="#" ><i class='bx bx-cart' ></i></button>
             </div>
         </div>
         {% endfor %}
     </div>
 </section>
 <script>
-    function addToOrder(e) {
-        console.log(e)
+    function addProduct(id) {
+        let splittedCookie = document.cookie.split(';')
+        data = splittedCookie[2].split('=') 
+        document.cookie = splittedCookie[0] + ';' + splittedCookie[1]
+        console.log(document.cookie)
+        if (data[1] === 'none') {
+            data[1] = `${id}:1`
+            console.log(data)
+        } else {
+            let neededData = data[1].split(':')
+            console.log(neededData)
+            neededData.map((item, index) => {
+                console.log(`${items} ==> item`)
+                console.log(`${index} ==> index`)
+            })
+        }
+        console.log(data)
+        console.log(document.cookie)
+        document.cookie = `${document.cookie}; ${data[0]}=${data[1]}`
+        console.log(document.cookie)
     }
 </script>
 {% endblock %}

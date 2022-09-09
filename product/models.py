@@ -17,3 +17,7 @@ class ShoppingCard(models.Model):
     phone_number = models.IntegerField()
     adresse      = models.CharField(max_length=100)
     date        = models.DateTimeField(auto_now_add=True)
+
+class HashSessions(models.Model):
+    hash_key = models.CharField(max_length=100)
+    
