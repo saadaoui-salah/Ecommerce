@@ -17,4 +17,4 @@ jobs:
           heroku_app_name: "my-ecommerce12 "
           heroku_email: ${{ secrets.EMAIL }}
           procfile: "web: gunicorn core.wsgi:application --bind 0.0.0.0:$PORT"
-          healthcheck: "https://my-ecommerce12 .herokuapp.com/healthy/"
+          healthcheck: "https://my-ecommerce12.herokuapp.com/healthy/"
