@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from multiprocessing import context
 from django.shortcuts import render
 from .models import Product, Order, ShoppingCard
@@ -28,3 +29,6 @@ def create_card(request):
         orders = Order.objects.filter(id=request.POST['id'])
         card = ShoppingCard.objects.create(product=orders, count=1)
     pass
+
+def healthy_check(request):
+    return "Server is runing ..."
