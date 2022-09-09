@@ -10,7 +10,7 @@ def create_order(request):
     pass
 
 
-def list_orders(request):
+def list_products(request):
     products = Product.objects.all()
     context = {'products': products}
     return render(request, 'product.html', context)
