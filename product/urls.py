@@ -1,4 +1,4 @@
-from .views import create_card, create_order, list_orders, list_products
+from .views import create_card, create_order, healthy_check, list_orders, list_products
 from django.urls import path
 
 urlpatterns = [
@@ -6,6 +6,5 @@ urlpatterns = [
     path('create-order/',create_card),
     path('add-product/',create_order),
     path('card/',list_orders),
-    path('healthy/')
-
+    path('healthy/', healthy_check)
 ] 
