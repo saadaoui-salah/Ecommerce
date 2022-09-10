@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block 'content' %}
 <section class="shop" id="shop">
     <div class="container">
@@ -34,23 +33,15 @@
             neededData.map((item, i) => {
                 let product_id = item.split(':')[0]
                 let value = parseInt(item.split(':')[1])
-                console.log(`${product_id} ==> p id`)
-                console.log(`${id} ==> id`)
-                console.log(neededData)
                 if (product_id == id){
                     value = value + 1
-                    let neededIndex = data[1].indexOf(item)
+                    let neededIndex = neededData.indexOf(item)
                     neededData[neededIndex] = `${product_id}:${value}`
-                    console.log(neededData[neededIndex])
-                    console.log(neededData)
-                    console.log(neededIndex)
                     data[1] = neededData.join(',')
-                    console.log(')))))))))')
                     added = true
                     return
                 }
             })
-            console.log(added)
             if (!added){
                 let myData = data[1].split(',')
                 myData.push(`${id}:1`)
@@ -58,7 +49,6 @@
             }
         }
         document.cookie = `${data[0]}=${data[1]}; ${document.cookie}`
-        console.log(document.cookie)
     }
 </script>
 {% endblock %}

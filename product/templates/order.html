@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
-
-
 {% block 'content' %}
 <div class="flex" style="margin: 110px 20px 30px 25px ;">
     <section class="shopping-card">
-        {% for order in orders %}
-        <div class="item-card flex">
-            <img class="p-image" src="{{ order.product.image.url }}" alt="">
-            <div>
-                <h4 class="p-name">{{ order.product.name }}</h5>
-                <input class="counter" type="number" name="count" value="{{ order.count }}" id="{{order.id}}">
+        {% for order in data %}
+        <div id="{{order.product.id}}" class="item-card flex" style="justify-content: space-between;">
+            <div class="flex">
+                <img class="p-image" src="{{ order.product.image.url }}" alt="">
+                <div>
+                    <h4 class="p-name">{{ order.product.name }}</h5>
+                    <input min="0" class="counter" type="number"  name="count" id="{{order.product.id}}" value="{{ order.count }}" id="{{order.id}}">
+                </div>
             </div>
+            <i class='bx bxs-trash-alt' onclick="deleteProduct('{{order.product.id}}')" style="color: red; margin-right: 20px; font-size: 20px; cursor: pointer;"></i>
         </div>
         {% endfor %}
     </section>
@@ -24,8 +25,33 @@
             <label for="name">Phone Number</label>
             <input type="tel" name="phoneNumber">
         </div>
-        <button onclick="alert()" class="btn">Submit</button>
+        <button onclick="submit()" class="btn">Submit</button>
     </section>
+    <script>
+        function deleteProduct(id){
+            const  product = document.getElementById(id)
+            console.log(product)
+        }
+    </script>
+    <script>
+        const inputs = document.getElementsByName('count')
+        let data = {
+            data:[],
+            adress: document.getElementsByName('adress')[0].value,
+            phoneNumber: document.getElementsByName('phoneNumber')[0].value
+        };
+        inputs.forEach((item) => {
+            data.data.push({
+                id: parseInt(item.id),
+                count: parseInt(item.count)
+            })
+        })
+        $.post(
+            document.URL.replace('card', 'create-order'),
+            JSON.stringify(data),
+            (response) => console.log(response)
+            )
+    </script>
 </div>
 <style>
 

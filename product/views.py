@@ -36,8 +36,18 @@ def list_products(request):
 
 def list_orders(request):
     # filter orders
-    products = Product.objects.filter(id__in=request.COOKIES.get('product_ids'))
-    context = {"products": products}
+    data = request.COOKIES.get('data')
+    print(data)
+    splitted_data = data.split(',')
+    data = [] 
+    for item in splitted_data:
+        product_data = {
+            'product': Product.objects.filter(id=int(item.split(':')[0])).get(),
+            'count'  : int(item.split(':')[1])
+        }
+        data.append(product_data)
+    
+    context = {"data": data}
     return render(request, 'order.html', context)
 
 
