@@ -27,31 +27,6 @@
         </div>
         <button onclick="submit()" class="btn">Submit</button>
     </section>
-    <script>
-        function deleteProduct(id){
-            const  product = document.getElementById(id)
-            console.log(product)
-        }
-    </script>
-    <script>
-        const inputs = document.getElementsByName('count')
-        let data = {
-            data:[],
-            adress: document.getElementsByName('adress')[0].value,
-            phoneNumber: document.getElementsByName('phoneNumber')[0].value
-        };
-        inputs.forEach((item) => {
-            data.data.push({
-                id: parseInt(item.id),
-                count: parseInt(item.count)
-            })
-        })
-        $.post(
-            document.URL.replace('card', 'create-order'),
-            JSON.stringify(data),
-            (response) => console.log(response)
-            )
-    </script>
 </div>
 <style>
 

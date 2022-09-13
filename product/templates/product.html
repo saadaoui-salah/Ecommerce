@@ -14,41 +14,4 @@
         {% endfor %}
     </div>
 </section>
-<script>
-    function addProduct(id) {
-        let splittedCookie = document.cookie.split(';')
-        let data; 
-        let index;
-        let added = false;
-        splittedCookie.map((item, index) => {
-            if (item.includes('data')){
-                data = splittedCookie[index].split('=') 
-                index = index
-            }
-        })
-        if (data[1] === 'none') {
-            data[1] = `${id}:1`
-        } else {
-            let neededData = data[1].split(',')
-            neededData.map((item, i) => {
-                let product_id = item.split(':')[0]
-                let value = parseInt(item.split(':')[1])
-                if (product_id == id){
-                    value = value + 1
-                    let neededIndex = neededData.indexOf(item)
-                    neededData[neededIndex] = `${product_id}:${value}`
-                    data[1] = neededData.join(',')
-                    added = true
-                    return
-                }
-            })
-            if (!added){
-                let myData = data[1].split(',')
-                myData.push(`${id}:1`)
-                data[1] = myData.join(',')
-            }
-        }
-        document.cookie = `${data[0]}=${data[1]}; ${document.cookie}`
-    }
-</script>
 {% endblock %}
