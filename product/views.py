@@ -1,14 +1,19 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Product, Order
+from .forms import ProductForm
 
 
-def create_order(request):
+def create_order(request, id):
     if request.method == 'POST':
-        product = Product.objects.filter(id=request.POST['id'])
-        order = Order.objects.create(product=product, count=1)
-    pass
-
+        product = Product.objects.filter(id=id)
+        context = {'product': product} 
+        print(request.POST)
+        return render(request, 'product.html', context)
+    product = Product.objects.first()
+    print(product)
+    context = {'product': product, 'form': ProductForm}
+    return render(request, 'order.html', context)
 
 
 def list_products(request):
@@ -17,12 +22,6 @@ def list_products(request):
     response = render(request, 'product.html', context) 
     return response
 
-
-def create_card(request):
-    if request.method == 'POST':
-        orders = Order.objects.filter(id=request.POST['id'])
-        card = Order.objects.create(product=orders, count=1)
-    pass
 
 def healthy_check(request):
     return HttpResponse("Server is runing ...")

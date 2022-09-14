@@ -1,33 +1,28 @@
 {% extends "base.html" %}
 
 {% block 'content' %}
-<div class="flex" style="margin: 110px 20px 30px 25px ;">
-    <section class="shopping-card">
-        {% for order in data %}
-        <div id="{{order.product.id}}" class="item-card flex" style="justify-content: space-between;">
-            <div class="flex">
-                <img class="p-image" src="{{ order.product.image.url }}" alt="">
-                <div>
-                    <h4 class="p-name">{{ order.product.name }}</h5>
-                    <input min="0" class="counter" type="number"  name="count" id="{{order.product.id}}" value="{{ order.count }}" id="{{order.id}}">
-                </div>
-            </div>
-            <i class='bx bxs-trash-alt' onclick="deleteProduct('{{order.product.id}}')" style="color: red; margin-right: 20px; font-size: 20px; cursor: pointer;"></i>
+<form style="margin: 120px;" method="POST" class="form">
+    {% csrf_token %}
+    <div class="item-card flex">
+        <img src="{{product.image.url}}" class="p-image">
+        <div>
+            <h4 class="p-name">{{product.name}}</h4>
+            <h5>{{product.price}}</h5>
         </div>
-        {% endfor %}
-    </section>
-    <section class="form">
+        
+    </div>
+    <div class="flex" style="margin-top: 30px;">
         <div>
             <label for="name">Adress</label>
             <input type="text" name="adress">
         </div>
         <div>
             <label for="name">Phone Number</label>
-            <input type="tel" name="phoneNumber">
+            <input type="tel" name="phone_number">
         </div>
-        <button onclick="submit()" class="btn">Submit</button>
-    </section>
-</div>
+    </div>
+    <button type="submit" class="btn" style="margin-top: 30px;">Submit</button>
+</form>
 <style>
 
 .btn{
@@ -40,7 +35,7 @@
 
 .flex{
 	display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 .p-name {
