@@ -10,7 +10,8 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    product      = models.ManyToManyField(Product)
+    full_name    = models.CharField(max_length=100)
+    product      = models.ForeignKey(Product, on_delete=models.CASCADE)
     count        = models.IntegerField() 
     phone_number = models.IntegerField()
     adresse      = models.CharField(max_length=100)

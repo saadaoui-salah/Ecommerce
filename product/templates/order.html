@@ -12,18 +12,35 @@
         
     </div>
     <div class="flex" style="margin-top: 30px;">
-        <div>
-            <label for="name">Adress</label>
-            <input type="text" name="adress">
+        <div style="width: 50%; margin-right: 10px;">
+            <div class="flex">
+                <label for="name">Full Name</label>
+                <input class="inpt-width" style="margin-bottom: 20px;" type="text" name="full_name">
+            </div>
+            <div class="flex">
+                <label for="name">Adresse</label>
+                <input class="inpt-width" type="text" name="adresse">
+
+            </div>
         </div>
-        <div>
-            <label for="name">Phone Number</label>
-            <input type="tel" name="phone_number">
+        <div style="width: 50%;">
+            <div class="flex">
+                <label for="name">Phone Number</label>
+                <input class="inpt-width" style="margin-bottom: 20px;" type="tel" name="phone_number">
+            </div>
+            <div class="flex">
+                <label for="name">Count</label>
+                <input class="inpt-width" type="number" name="count">
+            </div>
         </div>
     </div>
     <button type="submit" class="btn" style="margin-top: 30px;">Submit</button>
 </form>
 <style>
+
+.inpt-width{
+    width: 200px;
+}
 
 .btn{
     background-color: #22ff1b;
