@@ -27,7 +27,7 @@ if os.environ['ENV'] == 'DEV':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['https://my-ecommerce12.herokuapp.com', 'http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['my-ecommerce12.herokuapp.com/', '127.0.0.1:8000/']
 
 
 # Application definition
