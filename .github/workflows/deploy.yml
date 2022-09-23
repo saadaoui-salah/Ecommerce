@@ -13,8 +13,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
+          procfile: "web: gunicorn core.wsgi:application --bind 0.0.0.0:$PORT"
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "my-ecommerce12 "
           heroku_email: ${{ secrets.EMAIL }}
-          procfile: "web: gunicorn core.wsgi:application --bind 0.0.0.0:$PORT"
           healthcheck: "https://my-ecommerce12.herokuapp.com/healthy/"
