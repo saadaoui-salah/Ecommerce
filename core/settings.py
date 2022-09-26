@@ -27,7 +27,7 @@ if os.environ['ENV'] == 'DEV':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['my-ecommerce12.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['my-ecommerce12.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -134,10 +134,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = "/static/admin"
+STATIC_ROOT = "/var/www/my-ecommerce12.herokuapp.com/static/"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    '/var/www/static/',
 ]
 
 # Default primary key field type
