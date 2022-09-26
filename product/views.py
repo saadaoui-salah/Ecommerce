@@ -6,7 +6,6 @@ from .models import Product, Order
 def create_order(request, id):
     if request.method == 'POST':
         product = Product.objects.filter(id=id).get()
-        print(request.POST)
         order = Order.objects.create(
             full_name=request.POST['full_name'],
             product=product,
