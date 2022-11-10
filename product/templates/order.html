@@ -3,34 +3,32 @@
 {% block 'content' %}
 <form style="margin: 120px;" method="POST" class="form">
     {% csrf_token %}
-    <div class="item-card flex">
-        <img src="{{product.image.url}}" class="p-image">
-        <div>
-            <h4 class="p-name">{{product.name}}</h4>
-            <h5>{{product.price}}</h5>
-        </div>
-        
-    </div>
-    <div class="flex" style="margin-top: 30px;">
-        <div style="width: 50%; margin-right: 10px;">
-            <div class="flex">
-                <label for="name">Full Name</label>
-                <input class="inpt-width" style="margin-bottom: 20px;" type="text" name="full_name">
+    <div class="flex">
+        <div class="item-card flex" style="width: 50%; margin-right: 10px;">
+            <img src="{{product.image.url}}" class="p-image">
+            <div>
+                <h4 class="p-name">{{product.name}}</h4>
+                <h5>{{product.price}}</h5>
             </div>
-            <div class="flex">
+            
+        </div>
+        <div style="width: 50%; margin-left: 10px;">
+            <div class="flex" style="margin-bottom: 20px;">
+                <label for="name">Full Name</label>
+                <input  required="true" class="inpt-width" type="text" name="full_name">
+            </div>
+            <div class="flex" style="margin-bottom: 20px;">
                 <label for="name">Adresse</label>
-                <input class="inpt-width" type="text" name="adresse">
+                <input required="true" class="inpt-width" type="text" name="adresse">
 
             </div>
-        </div>
-        <div style="width: 50%;">
-            <div class="flex">
+            <div class="flex" style="margin-bottom: 20px;">
                 <label for="name">Phone Number</label>
-                <input class="inpt-width" style="margin-bottom: 20px;" type="tel" name="phone_number">
+                <input required="true" class="inpt-width" type="tel" name="phone_number">
             </div>
-            <div class="flex">
+            <div class="flex" style="margin-bottom: 20px;">
                 <label for="name">Count</label>
-                <input class="inpt-width" type="number" name="count">
+                <input required="true" class="inpt-width" type="number" name="count">
             </div>
         </div>
     </div>
