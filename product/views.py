@@ -9,7 +9,6 @@ from django.contrib.auth.models import AnonymousUser
 
 @login_required(login_url='/login/')
 def create_order(request, id):
-    print(request.user)
     UserTrack.objects.create(
         url='create-order',
         user_agent=request.headers['User-Agent'],
@@ -31,8 +30,6 @@ def create_order(request, id):
 
 
 def list_products(request):
-    print(request.user.image)
-    print(request.user)
     UserTrack.objects.create(
         url='product-list',
         user_agent=request.headers['User-Agent'],

@@ -1,5 +1,5 @@
 from django.db import models
-
+from account.models import User
 
 class Product(models.Model):
     name       = models.CharField(max_length=20)
@@ -10,6 +10,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
+    user         = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name    = models.CharField(max_length=100)
     product      = models.ForeignKey(Product, on_delete=models.CASCADE)
     count        = models.IntegerField() 
