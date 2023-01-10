@@ -23,7 +23,6 @@ class SignUpForm(UserCreationForm):
         return password2
 
     def save(self, commit=True):
-        print(self.cleaned_data)
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
         user.first_name = self.cleaned_data['first_name']
@@ -31,7 +30,7 @@ class SignUpForm(UserCreationForm):
         user.username = self.cleaned_data['email'].split('@')[0]
         user.set_password(self.cleaned_data['password2'])
         user.image = self.cleaned_data['image']
-
+        user.user_type = 'SELLER'
         if commit:
             user.save()
         return user

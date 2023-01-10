@@ -1,20 +1,135 @@
 {% extends "base.html" %}
+{% load static %}
 {% block 'content' %}
 <section>
-    <div class="w-full p-20 sm:block md:flex items-start justify-between">
-        <img src="{{product.image.url}}">
+    <div class="w-full px-20 sm:block md:flex items-start justify-between">
+        <img src="/media/{{product.image}}">
         <div class="w-full h-auto py-5">
             <div class="flex items-center justify-between">
-                <p class="font-bold text-3xl">{{product.name}}</p>
-                <p class="text-xl gray-300">{{product.price}}$</p>
-            </div>
-            <p class="text-md gray-300 mt-4">{{product.details}}</p>
-            <a class="w-full font-bold" href="/create-order/{{product.id}}/">
-                <div class="text-center mt-2 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm w-full py-2.5 mr-2 mb-2">
-                    Buy now
+                <div>
+                    <p class="font-bold text-3xl">{{product.name}}</p>
+                    <p class="text-gray-500">{{sold}} piece{% if sold > 1 %}s{% endif %} sold</p>
                 </div>
-            </a>
+                <div class="flex items-center justify-end">
+                    <p  class="text-sm text-gray-400 mr-2">{{product.price}}$</p>
+                    <p id="price" class="text-xl text-gray-600">{{product.price}}$</p>
+                    <script>
+                        var discount = parseInt('{{product.discount__percentage}}')
+                        var price    = parseFloat('{{product.price}}')
+                        var newPrice = price - (price * (discount/100))
+                        document.getElementById('price').innerText = `${newPrice} $`
+                    </script>
+                </div>
+            </div>
+            <p class="text-md gray-300 mt-4 mb-4">{{product.details}}</p>
+            {% if reviews_num > 0 %}
+            <div class="mt-6">
+                <!-----total of ratings----->
+                <div class="flex items-center mb-3">
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <svg aria-hidden="true" class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <p class="ml-2 text-sm font-medium text-gray-900">{{reviews_avg}} out of 5</p>
+                </div>
+                <!-----end total of ratings----->
+
+                <!--------Global reviews-------->
+                <p class="text-sm font-medium text-gray-500">{{reviews_num}} global ratings</p>
+                <!--------END Global reviews-------->
+                
+                <!---Rating details--->
+                <div class="flex items-center mt-4">
+                    <span class="text-sm font-medium text-blue-600">5 star</span>
+                    <div class="w-2/4 h-5 mx-4 bg-gray-200 rounded">
+                        <div class="h-5 bg-yellow-400 rounded" style="width: {{star_5}}%"></div>
+                    </div>
+                    <span class="text-sm font-medium text-blue-600">{{star_5}}%</span>
+                </div>
+                <div class="flex items-center mt-4">
+                    <span class="text-sm font-medium text-blue-600">4 star</span>
+                    <div class="w-2/4 h-5 mx-4 bg-gray-200 rounded">
+                        <div class="h-5 bg-yellow-400 rounded" style="width: {{star_4}}%"></div>
+                    </div>
+                    <span class="text-sm font-medium text-blue-600">{{star_4}}%</span>
+                </div>
+                <div class="flex items-center mt-4">
+                    <span class="text-sm font-medium text-blue-600">3 star</span>
+                    <div class="w-2/4 h-5 mx-4 bg-gray-200 rounded">
+                        <div class="h-5 bg-yellow-400 rounded" style="width: {{star_3}}%"></div>
+                    </div>
+                    <span class="text-sm font-medium text-blue-600">{{star_3}}%</span>
+                </div>
+                <div class="flex items-center mt-4">
+                    <span class="text-sm font-medium text-blue-600">2 star</span>
+                    <div class="w-2/4 h-5 mx-4 bg-gray-200 rounded">
+                        <div class="h-5 bg-yellow-400 rounded" style="width: {{star_2}}%"></div>
+                    </div>
+                    <span class="text-sm font-medium text-blue-600">{{star_2}}%</span>
+                </div>
+                <div class="flex items-center mt-4">
+                    <span class="text-sm font-medium text-blue-600">1 star</span>
+                    <div class="w-2/4 h-5 mx-4 bg-gray-200 rounded">
+                        <div class="h-5 bg-yellow-400 rounded" style="width: {{star_1}}%"></div>
+                    </div>
+                    <span class="text-sm font-medium text-blue-600">{{star_1}}%</span>
+                </div>   
+                <!---END Rating details--->
+            </div>
+            {% else %}
+            <p class="font-bold text-gray-400 text-sm">No reviews for now</p>
+            {% endif %}
         </div>
     </div>
+    <div class="w-full flex px-20 items-center justify-end">
+        <a class="flex items-center justify-evenly text-blue-700 w-28 sm:w-full md:w-28 font-bold" href="/order/create/{{product.id}}">
+            Buy now 
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>  
+        </a>
+    </div>
+</section>
+<section class="w-full p-20 sm:block md:flex items-end justify-between">
+    <form class="grid" method="post">
+        <div class="mb-3">
+            {% if image %}
+                <img class="w-10 h-10 rounded-full" src="/media/{{image}}" id="user-dropdown">
+            {% else %}
+                <img class="w-10 h-10 rounded-full" src="{% static '/img/Avatar-PNG-Download-Image.png' %}" id="user-dropdown">
+            {% endif %}
+        </div>
+            {% csrf_token %}
+        <div id="stars" class="flex items-center mb-3">
+            <svg onclick="clickStar(1)" name="star" id="1" aria-hidden="true" class="cursor-pointer w-8 h-8 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg onclick="clickStar(2)" name="star" id="2" aria-hidden="true" class="cursor-pointer w-8 h-8 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg onclick="clickStar(3)" name="star" id="3" aria-hidden="true" class="cursor-pointer w-8 h-8 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg onclick="clickStar(4)" name="star" id="4" aria-hidden="true" class="cursor-pointer w-8 h-8 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <svg onclick="clickStar(5)" name="star" id="5" aria-hidden="true" class="cursor-pointer w-8 h-8 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+        </div>
+        <input type="hidden" name="stars" id="stars" value="1">
+        <textarea class=" bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500" required placeholder="write your review" name="review" id="review" cols="30" rows="10"></textarea>
+        <button class="mt-5 p-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">share your review</button>
+    </form>
+    <script>
+        const starsInpt = document.getElementById('stars')
+        const updateStarClass = (old, newOne, i) => {
+            for (let x = i +1 ; x >= 1; x-- ){
+                var neededStar = document.getElementById(`${x}`)
+                if (neededStar.classList.contains(newOne)) {
+                    neededStar.classList.replace(old, newOne)
+                } else {
+                    neededStar.classList.replace(newOne, old)
+                }
+            }
+        }
+        const clickStar = (e) => {
+            var star = document.getElementById(e)
+            updateStarClass('text-gray-300', 'text-yellow-600', e-1)
+            starsInpt.value = e
+        }
+        
+    </script>
 </section>
 {% endblock %}

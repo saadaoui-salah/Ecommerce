@@ -3,7 +3,7 @@ from .forms import SignUpForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import AnonymousUser
-from product.models import Order
+from order.models import Order
 from account.models import User
 
 
@@ -20,7 +20,7 @@ def sign_up(request):
             login(request, user)
             return redirect('/')
         else:
-            print(form.errors)
+            return render(request, 'account/signup.html', context={'errors': form.errors})
 
 def authenticate_user(request):
     if request.user == AnonymousUser:
@@ -44,24 +44,6 @@ def log_user_out(request):
     return redirect('/')
 
 @login_required(login_url="/login/")
-def get_profile(request):
-    context = {
-        'orders_count': Order.objects.filter(user_id=request.user.id).count(),
-        'orders': Order.objects.filter(user_id=request.user.id),
-        'logged_in': True if request.user.is_authenticated else False,
-        'image': request.user and request.user.image if request.user.is_authenticated else ''
-        }
-    orders = Order.objects.filter(user__id=request.user.id)
-    spent = 0
-    if len(orders) > 0:
-        prices = list(orders.values_list('product__price'))   
-        for price in prices:
-            spent += price[0]
-    context['spent'] = spent
-    
-    return render(request, 'account/profile.html', context)
-
-@login_required(login_url="/login/")
 def get_settings(request):
     if request.method == 'POST':
         user = User.objects.filter(id=request.user.id).select_for_update()
@@ -72,8 +54,6 @@ def get_settings(request):
             address = request.POST['address'],
             phone_number = request.POST['phone_number']
         )
-        
-
     context = {
         'user': request.user,
         'logged_in': True if request.user.is_authenticated else False,

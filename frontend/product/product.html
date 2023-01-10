@@ -5,17 +5,17 @@
         <div class="block border border-gray-300 py-4 px-4 rounded md:w-full h-full">
             <p class="font-bold text-2xl">Categories</p>
             <div class="pt-4 grid md:grid-cols-3 md:gap-4 lg:grid-cols-6 lg:gap-4 sm:grid-cols-1">
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
-               <a class="w-full py-1 px-2 text-orange-500 bg-orange-100 hover:bg-orange-200 mb-2 md:mb-0 hover:text-orange-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
+               <a class="w-full py-1 px-2 text-gray-600 bg-gray-100 hover:bg-gray-200 mb-2 md:mb-0 hover:text-gray-600 hover:shadow-sm cursor-pointer font-bold rounded">hello</a>
             </div>
         </div>
     </div>
@@ -26,19 +26,28 @@
         <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             <!------ product list -------->
             {% for product in products %}
-            <div class="hover:shadow-md p-4 rounded border-gray-200 border">
+            <div class="relative hover:shadow-md p-4 rounded border-gray-200 border">
                 <a href="/product-details/{{product.id}}">
+                    <div class="z-50 absolute px-2 py-1 top-3 right-4 text-center rounded-lg bg-red-100 text-white">
+                        <p class="font-bold text-red-600">- {{product.discount__percentage}} %</p>
+                    </div>
                     <div class="group relative">
                         <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none lg:h-80">
-                        <img src="{{product.image.url}}" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                        <img src="/media/{{product.image}}" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                     <div class="mt-4 flex justify-between">
                         <p class="text-md text-start text-gray-900 font-bold">{{ product.name }}</p>
-                        <p class="text-md font-medium text-gray-900">{{ product.price }}</p>
+                        <p id="price-{{product.id}}" class="text-md font-medium text-gray-900"></p>
                     </div>
+                    <script>
+                        var discount = parseInt('{{product.discount__percentage}}')
+                        var price    = parseFloat('{{product.price}}')
+                        var newPrice = price - (price * (discount/100))
+                        document.getElementById('price-{{product.id}}').innerText = `${newPrice} $`
+                    </script>
                     </div>
                     <div class="flex w-full">
-                        <a class="w-full font-bold" href="/create-order/{{product.id}}">
+                        <a class="w-full font-bold" href="/order/create/{{product.id}}">
                             <div class="text-center mt-2 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm w-full py-2.5 mr-2 mb-2">
                                 Buy now
                             </div>

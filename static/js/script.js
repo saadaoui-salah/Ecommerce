@@ -1,4 +1,3 @@
-console.log("searchBtn")
 const profile = document.getElementById('user-dropdown')
 const menu  = document.getElementById('dropdown-menu')
 const searchBtn = document.getElementById('search-btn')
@@ -13,7 +12,6 @@ profile.addEventListener('click', (e) => {
 })
 
 searchBtn.addEventListener('click',() => {
-	console.log(searchInpt.value)
 	if (searchInpt.value != ""){
 
 		window.location.href = `${window.location.href}/q=${JSON.stringify(searchInpt.value)}`

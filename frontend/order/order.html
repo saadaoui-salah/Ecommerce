@@ -2,8 +2,8 @@
 
 {% block 'content' %}
 <section>
-    <div class="w-full h-40 rounded-md border border-gray-300 p-5 flex items-end justify-between">
-        <div class="flex items-start space-between">
+    <div class="w-full md:h-40 rounded-md border border-gray-300 p-5 md:flex md:items-start md:space-between sm:block">
+        <div class="md:flex md:items-start md:space-between sm:block">
             <img src="{{product.image.url}}" class="h-32">
             <div class="block">
                 <h2 class="text-black font-bold text-2xl">{{product.name}}</h2>
@@ -12,10 +12,10 @@
         </div>
         <div class="h-full flex flex-col justify-between">
             <div class="flex">
-                <label for="name" class="font-bold mr-2 p-2">Count :</label>
-                <input required="true" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2 " type="number" name="count">
+                <label for="name" class="font-bold mr-2 md:px-2 py-2">Count :</label>
+                <input value="1" required="true" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2 " type="number" name="count">
             </div>
-            <div class="flex justify-between">
+            <div class="flex md:justify-between">
                 <p class="font-bold mr-2">Price :</p>
                 <p >{{product.price}}</p>
             </div>
@@ -24,7 +24,7 @@
     <form class="mt-6 bg-gray-100 w-full rounded-md px-8 py-4" method="POST">
         {% csrf_token %}
         <div class="mb-4 md:flex md:justify-between sm:block">
-            <div>
+            <div class="mb-5">
                 <p class="font-bold">User Information</p>
                 <div class="flex mt-2">
                     <p class="mr-2">Full Name :</p>
@@ -39,20 +39,23 @@
                     <p class="text-gray-600"> {{user.phone_number}}</p>
                 </div>
             </div>
+
             <div>
                 <p class="font-bold">Order details</p>
-                <div class="flex mt-2 justify-between">
+                <div class="flex mt-2 ">
                     <p>{{product.name}}</p>
-                    <p class="text-gray-600">{{product.price}}</p>
+                    <p class="text-gray-600 ml-2">{{product.price}}$</p>
                 </div>
+            </div>
         <!----- <div class="flex mt-2 justify-between">
                     <p class="font-bold">Total :</p>
                     <p class="font-bold">+</p>
                     <p>333$</p>
                 </div> ---->
-            </div>
         </div>
-        <button class="mt-2 text-center text-blue-700 hover:underline" type="submit">Submit your order</a>
+        <div class="flex items-center justify-end">
+            <button class="text-center text-blue-700 hover:underline" type="submit">Submit your order</a>
+        </div>
     </form>
 </section>
 {% endblock %}
