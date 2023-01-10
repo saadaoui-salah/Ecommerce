@@ -10,14 +10,15 @@
                 <h5 class="text-gray-500">{{product.details}}</h5>
             </div>
         </div>
-        <div class="h-full flex flex-col justify-between">
-            <div class="flex">
-                <label for="name" class="font-bold mr-2 md:px-2 py-2">Count :</label>
-                <input value="1" required="true" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-20 p-2 " type="number" name="count">
-            </div>
+        <div class="h-full w-full relative">
             <div class="flex md:justify-between">
                 <p class="font-bold mr-2">Price :</p>
                 <p >{{product.price}}</p>
+            </div>
+            <div class="flex items-center bottom-0 left-0 w-full justify-end absolute">
+                <button onclick="decrease()" class="rounded-full w-6 font-bold h-6 bg-red-100 text-red-600">-</button>
+                <span id="count" class="w-8 h-8 text-center py-1 mx-2 rounded-full bg-gray-100">1</span>
+                <button onclick="increase()" class="rounded-full w-6 font-bold h-6 bg-red-100 text-red-600">+</button>
             </div>
         </div>
     </div>
@@ -39,7 +40,6 @@
                     <p class="text-gray-600"> {{user.phone_number}}</p>
                 </div>
             </div>
-
             <div>
                 <p class="font-bold">Order details</p>
                 <div class="flex mt-2 ">

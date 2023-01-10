@@ -17,3 +17,15 @@ searchBtn.addEventListener('click',() => {
 		window.location.href = `${window.location.href}/q=${JSON.stringify(searchInpt.value)}`
 	}	
 })
+
+const increase = () => {
+	let counter = document.getElementById("count")
+	counter.innerText = parseInt(counter.innerText) + 1
+}
+
+const decrease = () => {
+	let counter = document.getElementById("count")
+	if (parseInt(counter.innerText) > 0){
+		counter.innerText = parseInt(counter.innerText) - 1
+	}
+}
