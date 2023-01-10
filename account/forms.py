@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2', 'image')
 
 
     def clean_password2(self):
@@ -31,20 +31,9 @@ class SignUpForm(UserCreationForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name  = self.cleaned_data['last_name']
         user.username = self.cleaned_data['email'].split('@')[0]
-        user.set_password(self.cleaned_data['password2']) 
-        content_type = ContentType.objects.get_for_model(Order)
-        order_permissions = Permission.objects.filter(Order)
-        order_permissions_list = [] 
-        for permission in order_permissions:
-            order_permissions_list.append(
-                Permission.objects.get(
-                    codename=permission, 
-                    content_type=content_type
-                )
-            )
-            user.user_permission.add(order_permissions_list)
-        
+        user.set_password(self.cleaned_data['password2'])
+        user.image = self.cleaned_data['image']
+
         if commit:
-            print(user)
             user.save()
         return user
