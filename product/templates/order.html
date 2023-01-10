@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block 'content' %}
+<form style="margin: 120px;" method="POST" class="form">
+    {% csrf_token %}
+    <div class="flex">
+        <div class="item-card flex" style="width: 50%; margin-right: 10px;">
+            <img src="{{product.image.url}}" class="p-image">
+            <div>
+                <h4 class="p-name">{{product.name}}</h4>
+                <h5>{{product.price}}</h5>
+            </div>
+            
+        </div>
+        <div style="width: 50%; margin-left: 10px;">
+            <div class="flex" style="margin-bottom: 20px;">
+                <label for="name">Full Name</label>
+                <input  required="true" class="inpt-width" type="text" name="full_name">
+            </div>
+            <div class="flex" style="margin-bottom: 20px;">
+                <label for="name">Adresse</label>
+                <input required="true" class="inpt-width" type="text" name="adresse">
+
+            </div>
+            <div class="flex" style="margin-bottom: 20px;">
+                <label for="name">Phone Number</label>
+                <input required="true" class="inpt-width" type="tel" name="phone_number">
+            </div>
+            <div class="flex" style="margin-bottom: 20px;">
+                <label for="name">Count</label>
+                <input required="true" class="inpt-width" type="number" name="count">
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn" style="margin-top: 30px;">Submit</button>
+</form>
+<style>
+
+.inpt-width{
+    width: 200px;
+}
+
+.btn{
+    width: 90px;
+    height: 35px;
+    border: none;
+    cursor: pointer;
+}
+
+.flex{
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.p-name {
+    margin-bottom: 5px;
+}
+.item-card{
+    border: #121212 solid 0.5px;
+    margin-bottom: 5px;
+    justify-content: start;
+}
+
+input{
+    font-size: 15px;
+}
+
+.counter{
+    width: 50px;
+    height: 30px;
+    padding: 3px;
+}
+
+.shopping-card{
+	width: 75vw;
+	border: #bdbdbd solid 1px;	
+}
+
+.p-image{
+	width: 100px;
+	height: 100px;
+}
+
+.form{
+	display: block;
+}
+</style>
+{% endblock %}
