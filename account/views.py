@@ -1,9 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import AnonymousUser
+from product.models import Order
 
 def sign_up(request):
     if request.method == 'GET':
@@ -36,8 +36,26 @@ def authenticate_user(request):
                 try:
                     return redirect(request.get_full_path().split('=')[1])
                 except:
-                    return redirect('/home/')
+                    return redirect('/')
 
+def log_user_out(request):
+    logout(request)
+    return redirect('/')
+
+@login_required(login_url="/login/")
 def get_profile(request):
-    print(request.user.image)
-    return render(request, 'profile.html', {'image': request.user.image if request.user != AnonymousUser else ''})
+    context = {
+        'orders_count': Order.objects.filter(user_id=request.user.id).count(),
+        'orders': Order.objects.filter(user_id=request.user.id),
+        'logged_in': True if request.user.is_authenticated else False,
+        'image': request.user and request.user.image if request.user.is_authenticated else ''
+        }
+    orders = Order.objects.filter(user__id=request.user.id)
+    spent = 0
+    if len(orders) > 0:
+        prices = list(orders.values_list('product__price'))   
+        for price in prices:
+            spent += price[0]
+    context['spent'] = spent
+    
+    return render(request, 'profile.html', context)

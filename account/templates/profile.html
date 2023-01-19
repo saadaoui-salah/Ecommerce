@@ -44,15 +44,15 @@
     </div>
     <div class="flex">
         <div class="card flex" style="margin-right: 20px; background-color: #0010ff1a; border-color: #3f81ffe3;" >
-            <div>
-                <h1 style="color: #3f81ffe3;">Orders</h1>
-                <h2 style="color: #3f81ffe3;">22</h2>
+            <div class="flex">
+                <h1 style="color: #3f81ffe3; margin-right: 10px;">Orders:</h1>
+                <h2 style="color: #3f81ffe3;">{{ orders_count }}</h2>
             </div>
         </div>
         <div class="card flex" style="margin-right: 20px; background-color: #6aff4136; border-color: #48b000">
-            <div>
-                <h1 style="color: #48b000;">Spent</h1>
-                <h2 style="color: #48b000;">22 $</h2>
+            <div class="flex">
+                <h1 style="margin-right: 20px; color: #48b000;">Spent:</h1>
+                <h2 style="color: #48b000;">{{ spent }}$</h2>
                 
             </div>
         </div>
@@ -63,11 +63,13 @@
             <th>Product</th>
             <th>Price</th>
         </tr>
+        {% for order in orders %}
         <tr>
-            <th>#54</th>
-            <th>Bag 2</th>
-            <th>22.22$</th>
+            <th>#{{order.id}}</th>
+            <th>{{order.product.name}}</th>
+            <th>{{order.product.price}}$</th>
         </tr>
+        {% endfor %}
     </table>
 </section>
 {% endblock %}

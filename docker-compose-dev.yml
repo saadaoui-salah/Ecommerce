@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+    backend:
+        image: ecommerce:v0.0
+        build:
+            context: ../app/
+            dockerfile: ../docker/Dockerfile.dev
+        command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+        ports:
+            - "8000:8000"
+        env_file:
+            - ../app/dev.env
+        volumes:
+            - app:/app
+
+volumes:
+    app:

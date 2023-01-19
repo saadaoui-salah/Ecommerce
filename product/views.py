@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from .models import Product, Order
 from analytics.models import UserTrack
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from django.contrib.auth.models import AnonymousUser
 
 
@@ -17,6 +16,7 @@ def create_order(request, id):
     if request.method == 'POST':
         product = Product.objects.filter(id=id).get()
         order = Order.objects.create(
+            user=request.user,
             full_name=request.POST['full_name'],
             product=product,
             count=request.POST['count'],
@@ -25,7 +25,11 @@ def create_order(request, id):
         )
         return redirect('/success/')
     product = Product.objects.filter(id=id).get()
-    context = {'product': product, 'image': request.user.image if request.user != AnonymousUser else ''}
+    context = {
+        'product': product, 
+        'logged_in': True if request.user.is_authenticated else False,
+        'image': request.user and request.user.image if request.user.is_authenticated else ''
+        }
     return render(request, 'order.html', context)
 
 
@@ -36,14 +40,21 @@ def list_products(request):
         ip_address=request.headers['Host']
         )
     products = Product.objects.all()
-    context = {'products': products, 'image': request.user.image if request.user != AnonymousUser else ''}
+    context = {
+        'products': products, 
+        'logged_in': True if request.user.is_authenticated else False,
+        'image': request.user and request.user.image if request.user.is_authenticated else ''
+        }
     response = render(request, 'product.html', context) 
     return response
 
 
 @login_required(login_url='/login/')
 def order_created(request):
-    return render(request, 'success.html', {'image': request.user.image if request.user != AnonymousUser else ''})
+    return render(request, 'success.html', {
+        'logged_in': True if request.user.is_authenticated else False,
+        'image': request.user and request.user.image if request.user.is_authenticated else ''
+        })
 
 
 def healthy_check(request):
