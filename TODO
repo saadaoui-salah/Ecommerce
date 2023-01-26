@@ -1,3 +1,14 @@
-1- add auth system DONE 
-2- Create user profile DONE
-3- link it with backend ....
+- add categories
+- add white list
+
+- add seller account
+    * can "crud" product
+    * can view orders
+    * can update orders status
+
+- add multi subdomains
+- frontend updates
+    * can update top bar
+    * can update auto displayed images with text
+    * footer
+    * update logo

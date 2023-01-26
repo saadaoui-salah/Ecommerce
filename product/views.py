@@ -1,39 +1,49 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Product, Order
+from .models import Product, Order, ShoppingCart
 from analytics.models import UserTrack
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser
-
 
 @login_required(login_url='/login/')
-def create_order(request, id):
+def order_details(request, id):
+    product = Product.objects.filter(id=id).get()
     UserTrack.objects.create(
         url='create-order',
         user_agent=request.headers['User-Agent'],
         ip_address=request.headers['Host']
     )
     if request.method == 'POST':
-        product = Product.objects.filter(id=id).get()
         order = Order.objects.create(
             user=request.user,
-            full_name=request.POST['full_name'],
             product=product,
-            count=request.POST['count'],
-            phone_number=request.POST['phone_number'],
-            adresse=request.POST['adresse']
-        )
-        return redirect('/success/')
-    product = Product.objects.filter(id=id).get()
-    context = {
-        'product': product, 
-        'logged_in': True if request.user.is_authenticated else False,
-        'image': request.user and request.user.image if request.user.is_authenticated else ''
-        }
-    return render(request, 'order.html', context)
+            count=1
+            )
+        return redirect('/')
+    else:
+        context = {
+            'product': product, 
+            'user': request.user,
+            'logged_in': True if request.user.is_authenticated else False,
+            'image': request.user and request.user.image if request.user.is_authenticated else ''
+            }
+        
+        return render(request, 'product/order.html', context)
 
+@login_required(login_url='/login/')
+def add_to_card(request, id):
+#    cart = ShoppingCart.objects.filter(orders__user__id=request.user.id, status='PENDING')
+#    product = Product.objects.filter(id=id).get()
+#    if len(cart) == 0:
+#        cart = ShoppingCart.objects.create()
+#        cart.orders.set([order])
+#    else:
+#        if not order in cart.orders:
+#            cart.orders.set([cart.orders, order])
+    return redirect('/')
 
 def list_products(request):
+    if request.user.is_authenticated:
+        order = Order.objects.filter(user__id=request.user.id)
     UserTrack.objects.create(
         url='product-list',
         user_agent=request.headers['User-Agent'],
@@ -45,17 +55,17 @@ def list_products(request):
         'logged_in': True if request.user.is_authenticated else False,
         'image': request.user and request.user.image if request.user.is_authenticated else ''
         }
-    response = render(request, 'product.html', context) 
+    response = render(request, 'product/product.html', context) 
     return response
 
-
-@login_required(login_url='/login/')
-def order_created(request):
-    return render(request, 'success.html', {
+def get_product_details(request, id):
+    product = Product.objects.get(pk=id)
+    context = {
+        'product': product, 
         'logged_in': True if request.user.is_authenticated else False,
         'image': request.user and request.user.image if request.user.is_authenticated else ''
-        })
-
+    }
+    return render(request, 'product/product-details.html', context)
 
 def healthy_check(request):
     return HttpResponse("Server is runing ...")

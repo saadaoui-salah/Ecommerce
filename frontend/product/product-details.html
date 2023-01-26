@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block 'content' %}
+<section>
+    <div class="w-full p-20 sm:block md:flex items-start justify-between">
+        <img src="{{product.image.url}}">
+        <div class="w-full h-auto py-5">
+            <div class="flex items-center justify-between">
+                <p class="font-bold text-3xl">{{product.name}}</p>
+                <p class="text-xl gray-300">{{product.price}}$</p>
+            </div>
+            <p class="text-md gray-300 mt-4">{{product.details}}</p>
+            <a class="w-full font-bold" href="/create-order/{{product.id}}/">
+                <div class="text-center mt-2 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm w-full py-2.5 mr-2 mb-2">
+                    Buy now
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

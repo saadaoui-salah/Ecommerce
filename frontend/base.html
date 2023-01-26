@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block 'title' %}{% endblock %}</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+	<!----Custom css link---->
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">	
+</head>
+<body class="relative">
+<header class="relative flex items-center justify-center bg-red-400 w-full h-10">
+	<h1 class="text-white font-bold">hello world !</h1>
+</header>
+<nav class="relative bg-white z-40 shadow-lg mb-10">
+	<div class=" flex flex-wrap items-center justify-between lg:px-6">
+	<a href="/" class="px-6 py-6 flex items-center font-bold text-5xl">Bags</a>
+	<div class="px-6 py-6 flex items-center md:order-2">
+		<button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="true" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+			{% if logged_in %}
+				{% if image %}
+					<img class="w-8 h-8 rounded-full" src="/media/{{image}}" id="user-dropdown">
+				{% else %}
+					<img class="w-8 h-8 rounded-full" src="{% static '/img/Avatar-PNG-Download-Image.png' %}" id="user-dropdown">
+				{% endif %}
+			{% else %}
+				<div class="block bg-white ">
+					<a class="text-xl font-bold p-3 hover:bg-gray-800 hover:text-white rounded" href="/login/">login</a>
+					<a class="text-xl font-bold p-3 hover:border hover:border-gray-300 hover:bg-white hover:text-black bg-gray-800 text-white rounded" href="/signup/">Sign in</a>
+				</div>
+			{% endif %}
+		</button>
+		<!-- Dropdown menu -->
+		<div class="z-50 hidden top-24 right-5 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow" id="dropdown-menu">
+		  <ul class="py-1">
+			<li>
+			  <a href="/profile/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+			</li>
+			<li>
+			  <a href="/settings/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Settings</a>
+			</li>
+			<li>
+			  <a href="/logout/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+			</li>
+		  </ul>
+		</div>
+	</div>
+  </nav>
+	{% block 'content' %}
+	{% endblock %}
+	<!----about start--->
+<!----contact start--->
+	<section class="w-full bg-gray-200 p-5 mt-10">
+   		<div class="flex items-center justify-between px-6 py-6">
+        	<div class="block">
+           		<a class="font-bold text-black-200 text-xl hover:pl-2" href="#shop">Shop</a><br>
+          		<a class="font-bold text-black-200 text-xl hover:pl-2" href="#about">About</a><br>
+          		<a class="font-bold text-black-200 text-xl hover:pl-2" href="#faq">Faq</a><br>
+          		<a class="font-bold text-black-200 text-xl hover:pl-2" href="#contact">Contact</a><br>
+        	</div>
+
+        	<div class="block">
+        	    <a class="font-bold text-black-200 text-xl hover:pl-2" href="#">Shipping & Returns</a><br>
+        	    <a class="font-bold text-black-200 text-xl hover:pl-2" href="#">Store Policy</a><br>
+        	    <a class="font-bold text-black-200 text-xl hover:pl-2" href="#">Payment Methods</a><br>
+        	</div>
+
+        	<div class="block">
+        	    <a class="font-bold text-black-200 text-xl hover:pl-2" href="#">Contact</a>
+        	    <a class="font-bold text-black-200 text-xl hover:pl-2" href="#">Tel: 123-456-7890</a>
+        	</div>
+		</div>
+	</section>
+
+	<div class="h-10 bg-gray-800 flex items-center justify-center">
+		<p class="text-white">© 2023 by Salah. Proudly created with Saadaoui Salah</p>
+	</div>
+	<!----<div class="fixed bottom-5 right-5 rounded-full bg-white border border-gray-300 cursor-pointer shadow-lg w-16 h-16 flex items-center justify-center">
+		<img class="w-10 h-10" src="{% static 'img/shopping-cart.png' %}" alt="">
+	</div>
+	--->
+	<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>
