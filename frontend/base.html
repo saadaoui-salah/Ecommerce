@@ -17,10 +17,17 @@
 <header class="relative flex items-center justify-center bg-red-400 w-full h-10">
 	<h1 class="text-white font-bold">hello world !</h1>
 </header>
-<nav class="relative bg-white z-40 shadow-lg mb-10">
-	<div class=" flex flex-wrap items-center justify-between lg:px-6">
-	<a href="/" class="px-6 py-6 flex items-center font-bold text-5xl">Bags</a>
-	<div class="px-6 py-6 flex items-center md:order-2">
+<nav class="relative flex items-center justify-between bg-white z-40 shadow-lg mb-10">
+	<a href="/" class="px-6 py-6 font-bold text-5xl">Bags</a>
+	<div class="flex w-full">
+		<input id="search-inpt" placeholder="Search..." type="text" class="ml-20 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+		<button id="search-btn" class="bg-gray-50 border border-gray-300 hover:bg-gray-400 p-2 rounded-r-lg hover:text-gray-700" type="submit">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hover:shadow:lg">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+			  </svg>			  
+		</button>
+	</div>
+	<div class="px-6 py-6 flex items-center justify-end w-full md:order-2">
 		<button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="true" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
 			{% if logged_in %}
 				{% if image %}
