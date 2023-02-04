@@ -3,6 +3,7 @@ const menu  = document.getElementById('dropdown-menu')
 const searchBtn = document.getElementById('search-btn')
 const searchInpt = document.getElementById('search-inpt')
 
+
 profile.addEventListener('click', (e) => {
 	if (menu.className.includes('fixed')){
 		menu.className = menu.className.replace('fixed', 'hidden')
@@ -25,7 +26,7 @@ const increase = () => {
 
 const decrease = () => {
 	let counter = document.getElementById("count")
-	if (parseInt(counter.innerText) > 0){
+	if (parseInt(counter.innerText) > 1){
 		counter.innerText = parseInt(counter.innerText) - 1
 	}
 }

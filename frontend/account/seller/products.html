@@ -1,25 +1,36 @@
 {% extends "seller-profile.html" %}
 
 {% block 'profile-content' %}
-<table class="mt-10 w-full text-sm text-center text-gray-500">
+<div class="w-full flex items-center justify-end">
+    <button class="m-2 text-white font-bold bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Create</button>
+    <button disabled class="m-2 text-white font-bold disabled:bg-gray-300 disabled:text-black bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 text-center">Delete</button>
+</div>
+<table class="mt-2 w-full text-sm text-center text-gray-500">
     <thead class="text-xl font-bold text-gray-700 uppercase bg-gray-50">
         <tr>
-            <th scope="col" class="text-sm px-6 py-3">Product ID</th>
+            <th scope="col" class="text-sm px-6 py-3"><input type="checkbox" name="sellect-all"></th>
             <th scope="col" class="text-sm px-6 py-3">Image</th>
             <th scope="col" class="text-sm px-6 py-3">Name</th>
             <th scope="col" class="text-sm px-6 py-3">Price</th>
+            <th scope="col" class="text-sm px-6 py-3">In stock</th>
             <th scope="col" class="text-sm px-6 py-3">Action</th>
         </tr>
     </thead>
     <tbody>
         {% for product in products %}
         <tr class="bg-white border-b hover:bg-gray-50">
-            <th class="text-sm text-center">#{{product.id}}</th>
-            <th class="text-sm text-center"><img src="{{product.image.url}}"></th>
+            <th class="text-sm text-center"><input type="checkbox" onclick="(e) => select(e, '{{product.id}}')" id="product-{{product.id}}"></th>
+            <th class="text-sm flex justify-center"><img class="w-8 h-8 rounded-full" src="{{product.image.url}}"></th>
             <th class="text-sm text-center">{{product.name}}</th>
-            <th class="text-sm text-center">{{order.product.price}}$</th>
+            <th class="text-sm text-center">{{product.price}}$</th>
+            <th class="text-sm text-center">{{product.stock}}</th>
         </tr>
         {% endfor %}
+        <script>
+            const select = (e, id) => {
+                alert(id)
+            }
+        </script>
     </tbody>
 </table>
 {% endblock %}

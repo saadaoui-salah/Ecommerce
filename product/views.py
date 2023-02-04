@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Product, Review, Discount
+from .models import Product, Review, ProductTracks
 from order.models import Order 
 from analytics.models import UserTrack
 from django.contrib.auth.decorators import login_required
@@ -12,9 +12,15 @@ def list_products(request):
         user_agent=request.headers['User-Agent'],
         ip_address=request.headers['Host']
         )
-    products = Product.objects.all().get_details()
+    products = Product.objects.all()
+
+    for prodcut in products:
+        tracks = ProductTracks.objects.filter(product__id=prodcut.id).get()
+        tracks.views += 1
+        tracks.save()
+
     context = {
-        'products': products, 
+        'products': products.get_details(), 
         'logged_in': True if request.user.is_authenticated else False,
         'image': request.user and request.user.image if request.user.is_authenticated else ''
         }
@@ -24,6 +30,9 @@ def list_products(request):
 def get_product_details(request, id):
     product = Product.objects.filter(id=id).get_details()[0]
     reviews = Review.objects.filter(product__id=id)
+    tracks = ProductTracks.objects.filter(product__id=id).get()
+    tracks.clicks += 1
+    tracks.save()
     reviews_num = reviews.count()
     star_1 = reviews.get_1_star_percentage()
     star_2 = reviews.get_2_star_percentage()
@@ -64,7 +73,7 @@ def list_products_for_seller(request):
             'logged_in': True if request.user.is_authenticated else False,
             'image': request.user and request.user.image if request.user.is_authenticated else ''
         }
-    return render(request, 'account/seller/products.html')
+    return render(request, 'account/seller/products.html', context)
 
 @login_required(login_url='/login/')
 def create_product(request):

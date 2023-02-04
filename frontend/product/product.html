@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block 'content' %}
 <section>
-    <div class="mx-auto max-w-3xl sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+    <div class="mx-auto max-w-3xl sm:pt-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="block border border-gray-300 py-4 px-4 rounded md:w-full h-full">
             <p class="font-bold text-2xl">Categories</p>
             <div class="pt-4 grid md:grid-cols-3 md:gap-4 lg:grid-cols-6 lg:gap-4 sm:grid-cols-1">
@@ -28,7 +28,7 @@
             {% for product in products %}
             <div class="relative hover:shadow-md p-4 rounded border-gray-200 border">
                 <a href="/product-details/{{product.id}}">
-                    <div class="z-50 absolute px-2 py-1 top-3 right-4 text-center rounded-lg bg-red-100 text-white">
+                    <div id="discount-{{product.id}}" class="z-50 absolute px-2 py-1 top-3 right-4 text-center rounded-lg bg-red-100 text-white">
                         <p class="font-bold text-red-600">- {{product.discount__percentage}} %</p>
                     </div>
                     <div class="group relative">
@@ -42,8 +42,13 @@
                     <script>
                         var discount = parseInt('{{product.discount__percentage}}')
                         var price    = parseFloat('{{product.price}}')
-                        var newPrice = price - (price * (discount/100))
-                        document.getElementById('price-{{product.id}}').innerText = `${newPrice} $`
+                        if ('{{product.discount__percentage}}' != 'None'){
+                            var newPrice = price - (price * (discount/100))
+                            document.getElementById('price-{{product.id}}').innerText = `${newPrice} $`
+                        } else {
+                            document.getElementById('price-{{product.id}}').innerText = `${price} $`
+                            document.getElementById('discount-{{product.id}}').remove()
+                        }
                     </script>
                     </div>
                     <div class="flex w-full">

@@ -1,3 +1,20 @@
+--------- V 0.1
+
+- add filters
+    - by price
+    - new published
+    - orders
+
+- recomendation algorithm   
+    if has orders 60%
+        order by orders / show to 50 users
+    if no orders 30%
+        has clicks and views 60%
+            clicks / views
+        no clicks and have views 40%
+            order by views get small views
+        
+-------- V 0.2
 - add white list
 - add seller account
     * can "crud" product
@@ -5,6 +22,7 @@
     * can update orders status
 
 - add multi subdomains
+
 - frontend updates
     * can update top bar
     * can update auto displayed images with text

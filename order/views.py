@@ -4,7 +4,7 @@ from .models import Order, ShoppingCart
 from product.models import Product
 from analytics.models import UserTrack
 from django.contrib.auth.decorators import login_required
-
+from product.models import ProductTracks
 
 @login_required(login_url='/login/')
 def order_details(request, id):
@@ -20,6 +20,9 @@ def order_details(request, id):
             product=product,
             count=1
             )
+        tracks = ProductTracks.objects.filter(product__id=id).get()
+        tracks.orders += 1
+        tracks.save()
         return redirect('/')
     else:
         context = {

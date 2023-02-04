@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 
 {% block 'content' %}
-<section>
+<section class="p-20">
     <div class="w-full md:h-40 rounded-md border border-gray-300 p-5 md:flex md:items-start md:space-between sm:block">
-        <div class="md:flex md:items-start md:space-between sm:block">
+        <div class="w-80">
             <img src="{{product.image.url}}" class="h-32">
-            <div class="block">
-                <h2 class="text-black font-bold text-2xl">{{product.name}}</h2>
-                <h5 class="text-gray-500">{{product.details}}</h5>
-            </div>
+        </div>
+        <div class="block w-full">
+            <h2 class="text-black font-bold text-2xl">{{product.name}}</h2>
+            <h5 class="text-gray-500">{{product.details}}</h5>
         </div>
         <div class="h-full w-full relative">
-            <div class="flex md:justify-between">
-                <p class="font-bold mr-2">Price :</p>
-                <p >{{product.price}}</p>
+            <div class="relative w-full">
+                <p class="absolute top-0 right-0 font-bold">{{product.price}}$</p>
             </div>
             <div class="flex items-center bottom-0 left-0 w-full justify-end absolute">
                 <button onclick="decrease()" class="rounded-full w-6 font-bold h-6 bg-red-100 text-red-600">-</button>

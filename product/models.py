@@ -1,5 +1,7 @@
 from django.db import models
 from account.models import User
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from .managers import *
 
 
@@ -21,6 +23,12 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     objects    = ProductManager()
 
+class ProductTracks(models.Model):
+    product    = models.OneToOneField(Product, on_delete=models.CASCADE)
+    clicks     = models.IntegerField(default=0)
+    views      = models.IntegerField(default=0)
+    orders     = models.IntegerField(default=0)
+
 
 class Review(models.Model):
     user       = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -40,3 +48,9 @@ class Discount(models.Model):
     product  = models.ForeignKey(Product, on_delete=models.CASCADE)
     percentage = models.IntegerField()
 
+
+
+@receiver(pre_save, sender=Product)
+def my_handler(sender, instance, **kwargs):
+    if instance.pk:
+        ProductTracks.objects.create(product=instance)
